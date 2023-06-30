@@ -6,10 +6,10 @@ import payment from "./routes/paymentRoutes.js"
 import ErrorMiddleware from "./middlewares/Error.js"
 import cookieParser from "cookie-parser";
 import other from "./routes/otherRoutes.js"
-import dotenv from 'dotenv'
+
 import cors from "cors"
 
-dotenv.config({
+config({
     path:"./config/config.env",
 })
 const app=express();
