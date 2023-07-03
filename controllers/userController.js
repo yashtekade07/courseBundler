@@ -187,7 +187,7 @@ export const removerFromPlaylist = catchAsyncError(async(req,res,next)=>{
     await user.save();
     res.status(200).json({
         success:true,   
-        message:"removed from Playlist",
+        message:"Removed from Playlist",
     })
 })
 export const getAllUsers = catchAsyncError(async(req,res,next)=>{

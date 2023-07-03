@@ -65,8 +65,8 @@ export const cancelSubscription=catchAsyncError(async(req,res,next)=>{
     await instance.subscriptions.cancel(subscriptionId);
     const payment= await Payment.findOne({razorpay_subscription_id:subscriptionId});
     const gap=Date.now()-payment.createdAt;
-    const refundTime=process.env.REFUND_DATE*24*60*60*1000;
-    if(gap<=refundTime){
+    const refundTime=(process.env.REFUND_DAYS)*24*60*60*1000;
+    if(gap < refundTime){
         // await instance.payments.refund(payment.razorpay_payment_id)
         refund=true;
     }
@@ -76,6 +76,6 @@ export const cancelSubscription=catchAsyncError(async(req,res,next)=>{
     await user.save();
     res.status(200).json({
         success:true,
-        message:refund?"Subscription cancelled,You will recieve full refund within 7 days.":"Subscription cancelled,Now Refund initiated as it was cancelled after 7 days."
+        message:refund?"Subscription cancelled,You will recieve full refund within 7 days.":"Subscription cancelled,No Refund initiated as it was cancelled after 7 days."
     })
 })
