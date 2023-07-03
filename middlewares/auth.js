@@ -18,6 +18,6 @@ export const authorizeadmin= (req,res,next)=>{
         next();
 }
 export const authorizeSubsribers= (req,res,next)=>{
-        if(req.user.subscription.status!=='active' && req.user.role!=='admin') return next(new ErrorHandler("Only subscribers can access this resourse",403));
+        if((req.user.subscription.status!=='active'|| req.user.subscription.status===undefined )&& req.user.role!=='admin') return next(new ErrorHandler("Only subscribers can access this resourse",403));
         next();
 }
